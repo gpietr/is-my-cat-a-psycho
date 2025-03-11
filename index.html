@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Triarchic+ Questionnaire</title>
+    <style>
+        :root {
+            --primary: #6b5b95;
+            --secondary: #feb236;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #4caf50;
+            --info: #2196f3;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--secondary);
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .instructions {
+            background-color: var(--light);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .question-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .question-container:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .option-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 8px 5px;
+            background-color: var(--light);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .option-btn:hover {
+            background-color: #e2e6ea;
+        }
+        
+        .option-btn.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .question-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #5a4d7e;
+        }
+        
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .results {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 30px;
+            display: none;
+        }
+        
+        .results h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .result-card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result-card h3 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 18px;
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            border-radius: 5px;
+            background-color: var(--info);
+            width: 0;
+            transition: width 0.5s;
+        }
+        
+        .score-value {
+            font-weight: bold;
+            font-size: 18px;
+            color: var(--info);
+        }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            color: var(--primary);
+        }
+        
+        .category-description {
+            font-size: 14px;
+            margin-top: 10px;
+            color: #555;
+        }
+        
+        .reset-btn {
+            background-color: #f44336;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin-top: 10px;
+            }
+            
+            .options {
+                flex-direction: column;
+            }
+            
+            .option-btn {
+                width: 100%;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>The Cat Triarchic+ Questionnaire (CAT-Tri+)</h1>
+        </header>
+
+        <div class="instructions">
+            <p>Please consider each of the following statements and indicate which option best applies to your pet cat. We are interested in your opinions. There are no correct or incorrect responses.</p>
+        </div>
+
+        <div class="nav-container">
+            <div class="progress-text">Question <span id="current-question">1</span> of <span id="total-questions">46</span></div>
+        </div>
+
+        <div id="question-area"></div>
+
+        <div id="results" class="results">
+            <h2>Your Cat's Results</h2>
+            <div class="results-grid">
+                <div class="result-card">
+                    <h3>Boldness</h3>
+                    <div class="progress-container">
+                        <div id="boldness-progress" class="progress-bar"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span>Low</span>
+                        <span class="score-value" id="boldness-score">0.0</span>
+                        <span>High</span>
+                    </div>
+                    <div class="category-description">
+                        Measures your cat's tendency to explore, take risks, and engage in adventurous behaviors.
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <h3>Disinhibition</h3>
+                    <div class="progress-container">
+                        <div id="disinhibition-progress" class="progress-bar"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span>Low</span>
+                        <span class="score-value" id="disinhibition-score">0.0</span>
+                        <span>High</span>
+                    </div>
+                    <div class="category-description">
+                        Measures your cat's impulsivity, excitability, and need for stimulation.
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <h3>Meanness</h3>
+                    <div class="progress-container">
+                        <div id="meanness-progress" class="progress-bar"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span>Low</span>
+                        <span class="score-value" id="meanness-score">0.0</span>
+                        <span>High</span>
+                    </div>
+                    <div class="category-description">
+                        Measures your cat's tendency to break rules, damage things, and lack remorse.
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <h3>Pet-Unfriendliness</h3>
+                    <div class="progress-container">
+                        <div id="pet-unfriendliness-progress" class="progress-bar"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span>Low</span>
+                        <span class="score-value" id="pet-unfriendliness-score">0.0</span>
+                        <span>High</span>
+                    </div>
+                    <div class="category-description">
+                        Measures your cat's dominance and aggression toward other pets.
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <h3>Human-Unfriendliness</h3>
+                    <div class="progress-container">
+                        <div id="human-unfriendliness-progress" class="progress-bar"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span>Low</span>
+                        <span class="score-value" id="human-unfriendliness-score">0.0</span>
+                        <span>High</span>
+                    </div>
+                    <div class="category-description">
+                        Measures your cat's aggression toward humans and resistance to being handled.
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <h3>Overall CAT-Tri+ Score</h3>
+                    <div class="progress-container">
+                        <div id="total-progress" class="progress-bar"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span>Low</span>
+                        <span class="score-value" id="total-score">0.0</span>
+                        <span>High</span>
+                    </div>
+                    <div class="category-description">
+                        The overall score across all dimensions of the CAT-Tri+ measure.
+                    </div>
+                </div>
+            </div>
+
+
+            <button id="reset-quiz" class="reset-btn">Start Over</button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="questions.js"></script>
+    <script>
+        // Options for each question
+        const options = [
+            { value: 1, text: "Does not describe my cat" },
+            { value: 2, text: "Describes my cat slightly well" },
+            { value: 3, text: "Describes my cat moderately well" },
+            { value: 4, text: "Describes my cat very well" },
+            { value: 5, text: "Describes my cat extremely well" },
+            { value: null, text: "Not applicable" }
+        ];
+
+        // Category information
+        const categories = {
+            "boldness": { items: Array.from({length: 12}, (_, i) => i + 1), label: "Boldness" },
+            "disinhibition": { items: Array.from({length: 12}, (_, i) => i + 13), label: "Disinhibition" },
+            "meanness": { items: Array.from({length: 9}, (_, i) => i + 25), label: "Meanness" },
+            "pet-unfriendliness": { items: Array.from({length: 7}, (_, i) => i + 34), label: "Pet-Unfriendliness" },
+            "human-unfriendliness": { items: Array.from({length: 6}, (_, i) => i + 41), label: "Human-Unfriendliness" }
+        };
+
+        // Application state
+        let currentQuestionIndex = 0;
+        const answers = {};
+        const categoryScores = {
+            "boldness": 0,
+            "disinhibition": 0,
+            "meanness": 0,
+            "pet-unfriendliness": 0,
+            "human-unfriendliness": 0,
+            "total": 0
+        };
+
+        // DOM Elements
+        const questionArea = document.getElementById('question-area');
+        const resultsSection = document.getElementById('results');
+        const printResultsBtn = document.getElementById('print-results');
+        const resetQuizBtn = document.getElementById('reset-quiz');
+        const currentQuestionSpan = document.getElementById('current-question');
+        const totalQuestionsSpan = document.getElementById('total-questions');
+
+        // Initialize the quiz
+        function initQuiz() {
+            // Set total questions
+            totalQuestionsSpan.textContent = questionsData.length;
+            
+            // Show first question
+            showQuestion(0);
+            
+            // Add event listeners
+            resetQuizBtn.addEventListener('click', resetQuiz);
+        }
+
+        // Show a specific question
+        function showQuestion(index) {
+            const question = questionsData[index];
+            currentQuestionSpan.textContent = index + 1;
+            
+            // Create question HTML
+            questionArea.innerHTML = `
+                <div class="question-container" id="question-${question.id}">
+                    <div class="question-text">${question.id}. ${question.text}</div>
+                    <div class="options">
+                        ${options.map(option => `
+                            <div class="option-btn ${answers[question.id] === option.value ? 'selected' : ''}" 
+                                 data-value="${option.value === null ? 'null' : option.value}">
+                                ${option.text}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            // Add event listeners to option buttons
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    selectOption(this, question.id);
+                });
+            });
+            
+            // Update buttons
+            updateNavButtons();
+        }
+
+        // Select an option for a question
+        function selectOption(optionElement, questionId) {
+            // Remove selection from all options
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Add selection to clicked option
+            optionElement.classList.add('selected');
+            
+            // Store answer
+            const value = optionElement.getAttribute('data-value');
+            answers[questionId] = value === 'null' ? null : parseInt(value);
+            
+            // Update buttons
+            updateNavButtons();
+            
+            // Calculate scores in real-time
+            calculateScores();
+
+            showNextQuestion();
+        }
+
+        // Update navigation buttons
+        function updateNavButtons() {    
+            // Enable show results if all questions have been answered
+            const answeredQuestions = Object.keys(answers).length;
+            if (answeredQuestions === questionsData.length && currentQuestionIndex === questionsData.length - 1) {
+                showResults();
+            }
+        }
+
+        // Show previous question
+        function showPreviousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion(currentQuestionIndex);
+            }
+        }
+
+        // Show next question
+        function showNextQuestion() {
+            if (currentQuestionIndex < questionsData.length - 1) {
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex);
+            }
+        }
+
+        // Calculate scores
+        function calculateScores() {
+            // Reset scores
+            for (const category in categoryScores) {
+                categoryScores[category] = 0;
+            }
+            
+            // Calculate category scores
+            for (const category in categories) {
+                const categoryItems = categories[category].items;
+                let totalScore = 0;
+                let validItems = 0;
+                
+                categoryItems.forEach(itemId => {
+                    if (answers[itemId] !== null && answers[itemId] !== undefined) {
+                        totalScore += answers[itemId];
+                        validItems++;
+                    }
+                });
+                
+                if (validItems > 0) {
+                    categoryScores[category] = totalScore / validItems;
+                }
+            }
+            
+            // Calculate total score
+            let totalScore = 0;
+            let validItems = 0;
+            
+            questionsData.forEach(question => {
+                if (answers[question.id] !== null && answers[question.id] !== undefined) {
+                    totalScore += answers[question.id];
+                    validItems++;
+                }
+            });
+            
+            if (validItems > 0) {
+                categoryScores.total = totalScore / validItems;
+            }
+        }
+
+        // Show results
+        function showResults() {
+            // Calculate final scores
+            calculateScores();
+            
+            // Update result displays
+            document.getElementById('boldness-score').textContent = categoryScores.boldness.toFixed(1);
+            document.getElementById('disinhibition-score').textContent = categoryScores.disinhibition.toFixed(1);
+            document.getElementById('meanness-score').textContent = categoryScores.meanness.toFixed(1);
+            document.getElementById('pet-unfriendliness-score').textContent = categoryScores['pet-unfriendliness'].toFixed(1);
+            document.getElementById('human-unfriendliness-score').textContent = categoryScores['human-unfriendliness'].toFixed(1);
+            document.getElementById('total-score').textContent = categoryScores.total.toFixed(1);
+            
+            // Update progress bars (scale is 1-5)
+            document.getElementById('boldness-progress').style.width = `${(categoryScores.boldness / 5) * 100}%`;
+            document.getElementById('disinhibition-progress').style.width = `${(categoryScores.disinhibition / 5) * 100}%`;
+            document.getElementById('meanness-progress').style.width = `${(categoryScores.meanness / 5) * 100}%`;
+            document.getElementById('pet-unfriendliness-progress').style.width = `${(categoryScores['pet-unfriendliness'] / 5) * 100}%`;
+            document.getElementById('human-unfriendliness-progress').style.width = `${(categoryScores['human-unfriendliness'] / 5) * 100}%`;
+            document.getElementById('total-progress').style.width = `${(categoryScores.total / 5) * 100}%`;
+            
+            // Color the progress bars based on score (blue gradient)
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const score = parseFloat(bar.style.width) / 20; // Convert percentage to 0-5 scale
+                const blueIntensity = Math.floor((score / 5) * 255);
+                bar.style.backgroundColor = `rgb(0, ${100 + (155 * (1 - score/5))}, ${200 + (55 * (1 - score/5))})`;
+            });
+            
+            // Show results section
+            resultsSection.style.display = 'block';
+            
+            // Hide question area
+            questionArea.style.display = 'none';
+            document.querySelector('.nav-container').style.display = 'none';
+        }
+
+        // Reset quiz
+        function resetQuiz() {
+            // Clear answers
+            for (const key in answers) {
+                delete answers[key];
+            }
+            
+            // Reset current question
+            currentQuestionIndex = 0;
+            
+            // Show first question again
+            showQuestion(0);
+            
+            // Hide results section
+            resultsSection.style.display = 'none';
+            
+            // Show question area and navigation
+            questionArea.style.display = 'block';
+            prevBtn.style.display = 'block';
+            nextBtn.style.display = 'block';
+            document.querySelector('.nav-container').style.display = 'flex';
+            
+            // Update buttons
+            updateNavButtons();
+        }
+
+        // Initialize the quiz when the page loads
+        document.addEventListener('DOMContentLoaded', initQuiz);
+    </script>
+</body>
+</html>
