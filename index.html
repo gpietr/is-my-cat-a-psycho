@@ -215,6 +215,105 @@
             margin-top: 20px;
         }
         
+        .cat-name-input {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .cat-name-input input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 16px;
+        }
+        
+        .share-container {
+            margin-top: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+        }
+        
+        .share-title {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .share-link-container {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .share-link {
+            flex-grow: 1;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 14px;
+            color: #555;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .copy-btn {
+            padding: 10px 15px;
+            background-color: var(--info);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .social-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-button {
+            flex: 1;
+            padding: 8px 0;
+            border-radius: 4px;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .facebook-btn {
+            background-color: #3b5998;
+        }
+        
+        .twitter-btn {
+            background-color: #1da1f2;
+        }
+        
+        .whatsapp-btn {
+            background-color: #25d366;
+        }
+        
+        .email-btn {
+            background-color: #ea4335;
+        }
+        
+        .share-success {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: var(--success);
+            color: white;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -232,7 +331,215 @@
             .results-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .social-buttons {
+                flex-wrap: wrap;
+            }
+            
+            .social-button {
+                min-width: 120px;
+            }
         }
+
+        .resp-sharing-button__link,
+        .resp-sharing-button__icon {
+        display: inline-block
+        }
+
+        .resp-sharing-button__link {
+        text-decoration: none;
+        color: #fff;
+        margin: 0.5em
+        }
+
+        .resp-sharing-button {
+        border-radius: 5px;
+        transition: 25ms ease-out;
+        padding: 0.5em 0.75em;
+        font-family: Helvetica Neue,Helvetica,Arial,sans-serif
+        }
+
+        .resp-sharing-button__icon svg {
+        width: 1em;
+        height: 1em;
+        margin-right: 0.4em;
+        vertical-align: top
+        }
+
+        .resp-sharing-button--small svg {
+        margin: 0;
+        vertical-align: middle
+        }
+
+        /* Non solid icons get a stroke */
+        .resp-sharing-button__icon {
+        stroke: #fff;
+        fill: none;
+        line-height: 20px;
+        }
+
+        /* Solid icons get a fill */
+        .resp-sharing-button__icon--solid,
+        .resp-sharing-button__icon--solidcircle {
+        fill: #fff;
+        stroke: none
+        }
+
+        .resp-sharing-button--twitter {
+        background-color: #55acee
+        }
+
+        .resp-sharing-button--twitter:hover {
+        background-color: #2795e9
+        }
+
+        .resp-sharing-button--pinterest {
+        background-color: #bd081c
+        }
+
+        .resp-sharing-button--pinterest:hover {
+        background-color: #8c0615
+        }
+
+        .resp-sharing-button--facebook {
+        background-color: #3b5998
+        }
+
+        .resp-sharing-button--facebook:hover {
+        background-color: #2d4373
+        }
+
+        .resp-sharing-button--tumblr {
+        background-color: #35465C
+        }
+
+        .resp-sharing-button--tumblr:hover {
+        background-color: #222d3c
+        }
+
+        .resp-sharing-button--reddit {
+        background-color: #5f99cf
+        }
+
+        .resp-sharing-button--reddit:hover {
+        background-color: #3a80c1
+        }
+
+        .resp-sharing-button--google {
+        background-color: #dd4b39
+        }
+
+        .resp-sharing-button--google:hover {
+        background-color: #c23321
+        }
+
+        .resp-sharing-button--linkedin {
+        background-color: #0077b5
+        }
+
+        .resp-sharing-button--linkedin:hover {
+        background-color: #046293
+        }
+
+        .resp-sharing-button--email {
+        background-color: #777
+        }
+
+        .resp-sharing-button--email:hover {
+        background-color: #5e5e5e
+        }
+
+        .resp-sharing-button--xing {
+        background-color: #1a7576
+        }
+
+        .resp-sharing-button--xing:hover {
+        background-color: #114c4c
+        }
+
+        .resp-sharing-button--whatsapp {
+        background-color: #25D366
+        }
+
+        .resp-sharing-button--whatsapp:hover {
+        background-color: #1da851
+        }
+
+        .resp-sharing-button--hackernews {
+        background-color: #FF6600
+        }
+        .resp-sharing-button--hackernews:hover, .resp-sharing-button--hackernews:focus {   background-color: #FB6200 }
+
+        .resp-sharing-button--vk {
+        background-color: #507299
+        }
+
+        .resp-sharing-button--vk:hover {
+        background-color: #43648c
+        }
+
+        .resp-sharing-button--facebook {
+        background-color: #3b5998;
+        border-color: #3b5998;
+        }
+
+        .resp-sharing-button--facebook:hover,
+        .resp-sharing-button--facebook:active {
+        background-color: #2d4373;
+        border-color: #2d4373;
+        }
+
+        .resp-sharing-button--twitter {
+        background-color: #55acee;
+        border-color: #55acee;
+        }
+
+        .resp-sharing-button--twitter:hover,
+        .resp-sharing-button--twitter:active {
+        background-color: #2795e9;
+        border-color: #2795e9;
+        }
+
+        .resp-sharing-button--email {
+        background-color: #777777;
+        border-color: #777777;
+        }
+
+        .resp-sharing-button--email:hover,
+        .resp-sharing-button--email:active {
+        background-color: #5e5e5e;
+        border-color: #5e5e5e;
+        }
+
+        .resp-sharing-button--pinterest {
+        background-color: #bd081c;
+        border-color: #bd081c;
+        }
+
+        .resp-sharing-button--pinterest:hover,
+        .resp-sharing-button--pinterest:active {
+        background-color: #8c0615;
+        border-color: #8c0615;
+        }
+
+        .resp-sharing-button--whatsapp {
+        background-color: #25D366;
+        border-color: #25D366;
+        }
+
+        .resp-sharing-button--whatsapp:hover,
+        .resp-sharing-button--whatsapp:active {
+        background-color: #1DA851;
+        border-color: #1DA851;
+        }
+
+        .resp-sharing-button--telegram {
+        background-color: #54A9EB;
+        }
+
+        .resp-sharing-button--telegram:hover {
+        background-color: #4B97D1;}
+
     </style>
 </head>
 <body>
@@ -252,6 +559,11 @@
         <div id="question-area"></div>
 
         <div id="results" class="results">
+            <div class="cat-name-input">
+                <label for="cat-name">Your Cat's Name:</label>
+                <input type="text" id="cat-name" placeholder="Enter your cat's name">
+            </div>
+
             <h2>Your Cat's Results</h2>
             <div class="results-grid">
                 <div class="result-card">
@@ -345,6 +657,62 @@
                 </div>
             </div>
 
+            <div class="share-container">
+                <h3 class="share-title">Share Your Cat's Results</h3>
+                <div class="share-link-container">
+                    <div id="share-link" class="share-link">Your unique URL will appear here</div>
+                    <button id="copy-link" class="copy-btn">Copy</button>
+                </div>
+                <div id="copy-success" class="share-success">Link copied to clipboard!</div>
+                <div class="social-buttons">
+                    <div class="social-buttons">
+                        <!-- Facebook -->
+                        <a id="facebook-share" class="resp-sharing-button__link" href="#" target="_blank" rel="noopener" aria-label="Facebook">
+                          <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--medium">
+                            <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15.84 9.5H13.5V8.48c0-.53.35-.65.6-.65h1.4v-2.3h-2.35c-2.3 0-2.65 1.7-2.65 2.8V9.5h-2v2h2v7h3v-7h2.1l.24-2z"/></svg>
+                            </div>Facebook
+                          </div>
+                        </a>
+                      
+                        <!-- Twitter -->
+                        <a id="twitter-share" class="resp-sharing-button__link" href="#" target="_blank" rel="noopener" aria-label="Twitter">
+                          <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--medium">
+                            <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.5 7.4l-2 .2c-.4-.5-1-.8-2-.8C13.3 6.8 12 8 12 9.4v.6c-2 0-4-1-5.4-2.7-.2.4-.3.8-.3 1.3 0 1 .4 1.7 1.2 2.2-.5 0-1 0-1.2-.3 0 1.3 1 2.3 2 2.6-.3.4-.7.4-1 0 .2 1.4 1.2 2 2.3 2-1 1-2.5 1.4-4 1 1.3 1 2.7 1.4 4.2 1.4 4.8 0 7.5-4 7.5-7.5v-.4c.5-.4.8-1.5 1.2-2z"/><circle cx="12" cy="12" r="11.5"/></svg>
+                            </div>Twitter
+                          </div>
+                        </a>
+                      
+                        <!-- Email -->
+                        <a id="email-share" class="resp-sharing-button__link" href="#" target="_self" rel="noopener" aria-label="E-Mail">
+                          <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--medium">
+                            <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 16c0 .8-.7 1.5-1.5 1.5H6c-.8 0-1.5-.7-1.5-1.5V8c0-.8.7-1.5 1.5-1.5h12c.8 0 1.5.7 1.5 1.5v8zm-2-7.5L12 13 6.5 8.5m11 6l-4-2.5m-7 2.5l4-2.5"/><circle cx="12" cy="12" r="11.5"/></svg>
+                            </div>E-Mail
+                          </div>
+                        </a>
+                      
+                        <!-- WhatsApp -->
+                        <a id="whatsapp-share" class="resp-sharing-button__link" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+                          <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--medium">
+                            <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle xmlns="http://www.w3.org/2000/svg" cx="12" cy="12" r="11.5"/><path stroke-width="1px" d="M17.6 6.2c-1.5-1.5-3.4-2.3-5.5-2.3-4.3 0-7.8 3.5-7.8 7.8 0 1.4.4 2.7 1 3.9l-1.1 4 4.1-1.1c1.1.6 2.4.9 3.7.9 4.3 0 7.8-3.5 7.8-7.8.1-2-.7-3.9-2.2-5.4zm-5.5 11.9c-1.2 0-2.3-.3-3.3-.9l-.2-.1-2.4.6.7-2.4-.2-.2c-.6-1-1-2.2-1-3.4 0-3.6 2.9-6.5 6.5-6.5 1.7 0 3.3.7 4.6 1.9 1.2 1.2 1.9 2.8 1.9 4.6-.1 3.5-3 6.4-6.6 6.4zm3.5-4.8c-.2-.1-1.1-.6-1.3-.6-.2-.1-.3-.1-.4.1-.1.2-.5.6-.6.8-.1.1-.2.1-.4 0s-.8-.3-1.6-1c-.6-.5-1-1.2-1.1-1.3-.1-.2 0-.3.1-.4l.3-.3s.1-.2.2-.3c.1-.1 0-.2 0-.3s-.4-1.1-.6-1.4c-.2-.4-.3-.3-.4-.3h-.4s-.3 0-.5.2-.7.7-.7 1.6c0 1 .7 1.9.8 2s1.4 2.1 3.3 2.9c.5.2.8.3 1.1.4.5.1.9.1 1.2.1.4-.1 1.1-.5 1.3-.9.2-.5.2-.8.1-.9 0-.2-.2-.3-.4-.4z"/></svg>
+                            </div>WhatsApp
+                          </div>
+                        </a>
+                      
+                        <!-- Telegram -->
+                        <a id="telegram-share" class="resp-sharing-button__link" href="#" target="_blank" rel="noopener" aria-label="Telegram">
+                          <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--medium">
+                            <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M2.505 11.053c-.31.118-.505.738-.505.738s.203.62.513.737l3.636 1.355 1.417 4.557a.787.787 0 0 0 1.25.375l2.115-1.72a.29.29 0 0 1 .353-.01L15.1 19.85a.786.786 0 0 0 .746.095.786.786 0 0 0 .487-.573l2.793-13.426a.787.787 0 0 0-1.054-.893l-15.568 6z"/></svg>
+                            </div>Telegram
+                          </div>
+                        </a>
+                      </div>
+                </div>
+            </div>
 
             <button id="reset-quiz" class="reset-btn">Start Over</button>
         </div>
@@ -386,21 +754,43 @@
         // DOM Elements
         const questionArea = document.getElementById('question-area');
         const resultsSection = document.getElementById('results');
-        const printResultsBtn = document.getElementById('print-results');
         const resetQuizBtn = document.getElementById('reset-quiz');
         const currentQuestionSpan = document.getElementById('current-question');
         const totalQuestionsSpan = document.getElementById('total-questions');
+        const catNameInput = document.getElementById('cat-name');
+        const shareLink = document.getElementById('share-link');
+        const copyLinkBtn = document.getElementById('copy-link');
+        const copySuccess = document.getElementById('copy-success');
+        const facebookShareBtn = document.getElementById('facebook-share');
+        const twitterShareBtn = document.getElementById('twitter-share');
+        const whatsappShareBtn = document.getElementById('whatsapp-share');
+        const emailShareBtn = document.getElementById('email-share');
+        const telegramShareBtn = document.getElementById('telegram-share');
+  
+        // Add event listeners
+        resetQuizBtn.addEventListener('click', resetQuiz);
+        copyLinkBtn.addEventListener('click', copyShareLink);
+        catNameInput.addEventListener('input', updateShareLinks);
 
         // Initialize the quiz
         function initQuiz() {
+            // Check if URL has parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('data')) {
+                try {
+                    loadFromShareLink(urlParams.get('data'));
+                    return; // Skip normal initialization if loading from share link
+                } catch (e) {
+                    console.error("Error loading shared data:", e);
+                    // Continue with normal initialization if loading fails
+                }
+            }
+            
             // Set total questions
             totalQuestionsSpan.textContent = questionsData.length;
             
             // Show first question
             showQuestion(0);
-            
-            // Add event listeners
-            resetQuizBtn.addEventListener('click', resetQuiz);
         }
 
         // Show a specific question
@@ -462,15 +852,9 @@
             // Enable show results if all questions have been answered
             const answeredQuestions = Object.keys(answers).length;
             if (answeredQuestions === questionsData.length && currentQuestionIndex === questionsData.length - 1) {
+                // Calculate final scores
+                calculateScores();
                 showResults();
-            }
-        }
-
-        // Show previous question
-        function showPreviousQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                showQuestion(currentQuestionIndex);
             }
         }
 
@@ -525,8 +909,6 @@
 
         // Show results
         function showResults() {
-            // Calculate final scores
-            calculateScores();
             
             // Update result displays
             document.getElementById('boldness-score').textContent = categoryScores.boldness.toFixed(1);
@@ -552,12 +934,108 @@
                 bar.style.backgroundColor = `rgb(0, ${100 + (155 * (1 - score/5))}, ${200 + (55 * (1 - score/5))})`;
             });
             
+            // Create share link and update buttons
+            updateShareLinks();
+            
             // Show results section
             resultsSection.style.display = 'block';
             
             // Hide question area
             questionArea.style.display = 'none';
             document.querySelector('.nav-container').style.display = 'none';
+        }
+
+        // Generate share data
+        function generateShareData() {
+            const data = {
+                name: catNameInput.value || "My Cat",
+                scores: {
+                    b: parseFloat(categoryScores.boldness.toFixed(1)),
+                    d: parseFloat(categoryScores.disinhibition.toFixed(1)),
+                    m: parseFloat(categoryScores.meanness.toFixed(1)),
+                    p: parseFloat(categoryScores['pet-unfriendliness'].toFixed(1)),
+                    h: parseFloat(categoryScores['human-unfriendliness'].toFixed(1)),
+                    t: parseFloat(categoryScores.total.toFixed(1))
+                }
+            };
+            
+            // Convert to base64 for URL sharing
+            return btoa(JSON.stringify(data));
+        }
+
+        // Update share links
+        function updateShareLinks() {
+            const shareData = generateShareData();
+            const shareUrl = `${window.location.origin}${window.location.pathname}?data=${encodeURIComponent(shareData)}`;
+            
+            shareLink.textContent = shareUrl;
+            
+            const catName = catNameInput.value || "My Cat";
+            const shareText = `Check out ${catName}'s CAT-Tri+ results! Score: ${categoryScores.total.toFixed(0)}/5`;
+            
+            // Update social share links
+            facebookShareBtn.href = `https://facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+            twitterShareBtn.href = `https://twitter.com/intent/tweet/?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+            emailShareBtn.href = `mailto:?subject=${encodeURIComponent("My Cat's CAT-Tri+ Results")}&body=${encodeURIComponent(shareText + "\n\n" + shareUrl)}`;
+            whatsappShareBtn.href = `whatsapp://send?text=${encodeURIComponent(shareText + " " + shareUrl)}`;
+            document.getElementById('telegram-share').href = `https://telegram.me/share/url?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+        }
+
+        // Copy share link to clipboard
+        function copyShareLink() {
+            const shareText = shareLink.textContent;
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(shareText)
+                    .then(() => showCopySuccess())
+                    .catch(err => console.error('Could not copy text: ', err));
+            } else {
+                // Fallback for older browsers
+                const textArea = document.createElement("textarea");
+                textArea.value = shareText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textArea);
+                showCopySuccess();
+            }
+        }
+
+        // Show copy success message
+        function showCopySuccess() {
+            copySuccess.style.display = 'block';
+            setTimeout(() => {
+                copySuccess.style.display = 'none';
+            }, 3000);
+        }
+
+        // Load results from share link
+        function loadFromShareLink(encodedData) {
+            try {
+                const data = JSON.parse(atob(decodeURIComponent(encodedData)));
+                
+                // Set cat name
+                if (data.name) {
+                    catNameInput.value = data.name;
+                }
+                
+                // Set scores
+                if (data.scores) {
+                    categoryScores.boldness = data.scores.b;
+                    categoryScores.disinhibition = data.scores.d;
+                    categoryScores.meanness = data.scores.m;
+                    categoryScores['pet-unfriendliness'] = data.scores.p;
+                    categoryScores['human-unfriendliness'] = data.scores.h;
+                    categoryScores.total = data.scores.t;
+                }
+                
+                // Show results directly
+                showResults();
+            } catch (e) {
+                console.error("Error loading shared data:", e);
+                alert("There was an error loading the shared results. Starting a new quiz...");
+                initQuiz();
+            }
         }
 
         // Reset quiz
@@ -578,8 +1056,6 @@
             
             // Show question area and navigation
             questionArea.style.display = 'block';
-            prevBtn.style.display = 'block';
-            nextBtn.style.display = 'block';
             document.querySelector('.nav-container').style.display = 'flex';
             
             // Update buttons
