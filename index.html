@@ -4,543 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cat Triarchic+ Questionnaire</title>
-    <style>
-        :root {
-            --primary: #6b5b95;
-            --secondary: #feb236;
-            --light: #f8f9fa;
-            --dark: #343a40;
-            --success: #4caf50;
-            --info: #2196f3;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            background-color: #f0f2f5;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--secondary);
-        }
-        
-        h1 {
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-        
-        .instructions {
-            background-color: var(--light);
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--secondary);
-        }
-        
-        .question-container {
-            margin-bottom: 20px;
-            padding: 15px;
-            border-radius: 5px;
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .question-container:hover {
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .question-text {
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-        
-        .options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .option-btn {
-            flex: 1;
-            min-width: 120px;
-            padding: 8px 5px;
-            background-color: var(--light);
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-            font-size: 14px;
-        }
-        
-        .option-btn:hover {
-            background-color: #e2e6ea;
-        }
-        
-        .option-btn.selected {
-            background-color: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        
-        .question-nav {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-        
-        button {
-            padding: 10px 20px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-        
-        button:hover {
-            background-color: #5a4d7e;
-        }
-        
-        button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-        
-        .results {
-            background-color: var(--light);
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 30px;
-            display: none;
-        }
-        
-        .results h2 {
-            color: var(--primary);
-            border-bottom: 2px solid var(--secondary);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .results-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        
-        .result-card {
-            background-color: white;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .result-card h3 {
-            margin-top: 0;
-            color: var(--primary);
-            font-size: 18px;
-        }
-        
-        .progress-container {
-            width: 100%;
-            height: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            margin-top: 10px;
-            margin-bottom: 5px;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            border-radius: 5px;
-            background-color: var(--info);
-            width: 0;
-            transition: width 0.5s;
-        }
-        
-        .score-value {
-            font-weight: bold;
-            font-size: 18px;
-            color: var(--info);
-        }
-        
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .progress-text {
-            font-size: 14px;
-            color: var(--primary);
-        }
-        
-        .category-description {
-            font-size: 14px;
-            margin-top: 10px;
-            color: #555;
-        }
-        
-        .reset-btn {
-            background-color: #f44336;
-            margin-top: 20px;
-        }
-        
-        .cat-name-input {
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-        
-        .cat-name-input input {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            width: 100%;
-            font-size: 16px;
-        }
-        
-        .share-container {
-            margin-top: 30px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: white;
-        }
-        
-        .share-title {
-            margin-top: 0;
-            color: var(--primary);
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-        
-        .share-link-container {
-            display: flex;
-            margin-bottom: 15px;
-        }
-        
-        .share-link {
-            flex-grow: 1;
-            padding: 10px;
-            background-color: #f5f5f5;
-            border: 1px solid #ddd;
-            border-radius: 4px 0 0 4px;
-            font-size: 14px;
-            color: #555;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        
-        .copy-btn {
-            padding: 10px 15px;
-            background-color: var(--info);
-            color: white;
-            border: none;
-            border-radius: 0 4px 4px 0;
-            cursor: pointer;
-        }
-        
-        .social-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .social-button {
-            flex: 1;
-            padding: 8px 0;
-            border-radius: 4px;
-            color: white;
-            text-align: center;
-            cursor: pointer;
-            font-weight: 500;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .facebook-btn {
-            background-color: #3b5998;
-        }
-        
-        .twitter-btn {
-            background-color: #1da1f2;
-        }
-        
-        .whatsapp-btn {
-            background-color: #25d366;
-        }
-        
-        .email-btn {
-            background-color: #ea4335;
-        }
-        
-        .share-success {
-            display: none;
-            margin-top: 10px;
-            padding: 10px;
-            background-color: var(--success);
-            color: white;
-            border-radius: 4px;
-            text-align: center;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-                margin-top: 10px;
-            }
-            
-            .options {
-                flex-direction: column;
-            }
-            
-            .option-btn {
-                width: 100%;
-            }
-            
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .social-buttons {
-                flex-wrap: wrap;
-            }
-            
-            .social-button {
-                min-width: 120px;
-            }
-        }
-
-        .resp-sharing-button__link,
-        .resp-sharing-button__icon {
-        display: inline-block
-        }
-
-        .resp-sharing-button__link {
-        text-decoration: none;
-        color: #fff;
-        margin: 0.5em
-        }
-
-        .resp-sharing-button {
-        border-radius: 5px;
-        transition: 25ms ease-out;
-        padding: 0.5em 0.75em;
-        font-family: Helvetica Neue,Helvetica,Arial,sans-serif
-        }
-
-        .resp-sharing-button__icon svg {
-        width: 1em;
-        height: 1em;
-        margin-right: 0.4em;
-        vertical-align: top
-        }
-
-        .resp-sharing-button--small svg {
-        margin: 0;
-        vertical-align: middle
-        }
-
-        /* Non solid icons get a stroke */
-        .resp-sharing-button__icon {
-        stroke: #fff;
-        fill: none;
-        line-height: 20px;
-        }
-
-        /* Solid icons get a fill */
-        .resp-sharing-button__icon--solid,
-        .resp-sharing-button__icon--solidcircle {
-        fill: #fff;
-        stroke: none
-        }
-
-        .resp-sharing-button--twitter {
-        background-color: #55acee
-        }
-
-        .resp-sharing-button--twitter:hover {
-        background-color: #2795e9
-        }
-
-        .resp-sharing-button--pinterest {
-        background-color: #bd081c
-        }
-
-        .resp-sharing-button--pinterest:hover {
-        background-color: #8c0615
-        }
-
-        .resp-sharing-button--facebook {
-        background-color: #3b5998
-        }
-
-        .resp-sharing-button--facebook:hover {
-        background-color: #2d4373
-        }
-
-        .resp-sharing-button--tumblr {
-        background-color: #35465C
-        }
-
-        .resp-sharing-button--tumblr:hover {
-        background-color: #222d3c
-        }
-
-        .resp-sharing-button--reddit {
-        background-color: #5f99cf
-        }
-
-        .resp-sharing-button--reddit:hover {
-        background-color: #3a80c1
-        }
-
-        .resp-sharing-button--google {
-        background-color: #dd4b39
-        }
-
-        .resp-sharing-button--google:hover {
-        background-color: #c23321
-        }
-
-        .resp-sharing-button--linkedin {
-        background-color: #0077b5
-        }
-
-        .resp-sharing-button--linkedin:hover {
-        background-color: #046293
-        }
-
-        .resp-sharing-button--email {
-        background-color: #777
-        }
-
-        .resp-sharing-button--email:hover {
-        background-color: #5e5e5e
-        }
-
-        .resp-sharing-button--xing {
-        background-color: #1a7576
-        }
-
-        .resp-sharing-button--xing:hover {
-        background-color: #114c4c
-        }
-
-        .resp-sharing-button--whatsapp {
-        background-color: #25D366
-        }
-
-        .resp-sharing-button--whatsapp:hover {
-        background-color: #1da851
-        }
-
-        .resp-sharing-button--hackernews {
-        background-color: #FF6600
-        }
-        .resp-sharing-button--hackernews:hover, .resp-sharing-button--hackernews:focus {   background-color: #FB6200 }
-
-        .resp-sharing-button--vk {
-        background-color: #507299
-        }
-
-        .resp-sharing-button--vk:hover {
-        background-color: #43648c
-        }
-
-        .resp-sharing-button--facebook {
-        background-color: #3b5998;
-        border-color: #3b5998;
-        }
-
-        .resp-sharing-button--facebook:hover,
-        .resp-sharing-button--facebook:active {
-        background-color: #2d4373;
-        border-color: #2d4373;
-        }
-
-        .resp-sharing-button--twitter {
-        background-color: #55acee;
-        border-color: #55acee;
-        }
-
-        .resp-sharing-button--twitter:hover,
-        .resp-sharing-button--twitter:active {
-        background-color: #2795e9;
-        border-color: #2795e9;
-        }
-
-        .resp-sharing-button--email {
-        background-color: #777777;
-        border-color: #777777;
-        }
-
-        .resp-sharing-button--email:hover,
-        .resp-sharing-button--email:active {
-        background-color: #5e5e5e;
-        border-color: #5e5e5e;
-        }
-
-        .resp-sharing-button--pinterest {
-        background-color: #bd081c;
-        border-color: #bd081c;
-        }
-
-        .resp-sharing-button--pinterest:hover,
-        .resp-sharing-button--pinterest:active {
-        background-color: #8c0615;
-        border-color: #8c0615;
-        }
-
-        .resp-sharing-button--whatsapp {
-        background-color: #25D366;
-        border-color: #25D366;
-        }
-
-        .resp-sharing-button--whatsapp:hover,
-        .resp-sharing-button--whatsapp:active {
-        background-color: #1DA851;
-        border-color: #1DA851;
-        }
-
-        .resp-sharing-button--telegram {
-        background-color: #54A9EB;
-        }
-
-        .resp-sharing-button--telegram:hover {
-        background-color: #4B97D1;}
-
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -548,23 +12,19 @@
             <h1>The Cat Triarchic+ Questionnaire (CAT-Tri+)</h1>
         </header>
 
-        <div class="instructions">
+        <div class="instructions hide-in-link">
             <p>Please consider each of the following statements and indicate which option best applies to your pet cat. We are interested in your opinions. There are no correct or incorrect responses.</p>
         </div>
 
-        <div class="nav-container">
+        <div class="nav-container hide-in-link">
             <div class="progress-text">Question <span id="current-question">1</span> of <span id="total-questions">46</span></div>
         </div>
 
-        <div id="question-area"></div>
+        <div id="question-area" class="hide-in-link"></div>
 
         <div id="results" class="results">
-            <div class="cat-name-input">
-                <label for="cat-name">Your Cat's Name:</label>
-                <input type="text" id="cat-name" placeholder="Enter your cat's name">
-            </div>
-
-            <h2>Your Cat's Results</h2>
+            <h2 class="only-show-in-link">Is <span id="cat-name-text"></span> a psycho? I've tested!</h2>
+            <h2 class="hide-in-link">Your Cat's Results</h2>
             <div class="results-grid">
                 <div class="result-card">
                     <h3>Boldness</h3>
@@ -657,7 +117,14 @@
                 </div>
             </div>
 
-            <div class="share-container">
+            <div class="results" id="cat-name-form-section">
+                <div class="cat-name-input">
+                    <label for="cat-name">Your Cat's Name:</label>
+                    <input type="text" id="cat-name" placeholder="Enter your cat's name">
+                </div>
+            </div>
+
+            <div class="share-container hide-in-link">
                 <h3 class="share-title">Share Your Cat's Results</h3>
                 <div class="share-link-container">
                     <div id="share-link" class="share-link">Your unique URL will appear here</div>
@@ -714,7 +181,8 @@
                 </div>
             </div>
 
-            <button id="reset-quiz" class="reset-btn">Start Over</button>
+            <button id="reset-quiz" class="reset-btn hide-in-link">Start Over</button>
+            <a id="reset-quiz" href="." class="only-show-in-link"><button class="reset-btn">Test my cat!</button></a>
         </div>
     </div>
 
@@ -754,6 +222,7 @@
         // DOM Elements
         const questionArea = document.getElementById('question-area');
         const resultsSection = document.getElementById('results');
+        const catNameFormSection = document.getElementById('cat-name-form-section');
         const resetQuizBtn = document.getElementById('reset-quiz');
         const currentQuestionSpan = document.getElementById('current-question');
         const totalQuestionsSpan = document.getElementById('total-questions');
@@ -766,11 +235,14 @@
         const whatsappShareBtn = document.getElementById('whatsapp-share');
         const emailShareBtn = document.getElementById('email-share');
         const telegramShareBtn = document.getElementById('telegram-share');
+        const catNameText = document.getElementById('cat-name-text');
   
         // Add event listeners
         resetQuizBtn.addEventListener('click', resetQuiz);
         copyLinkBtn.addEventListener('click', copyShareLink);
         catNameInput.addEventListener('input', updateShareLinks);
+
+        document.querySelectorAll('.only-show-in-link').forEach(el => el.style.display = 'none')
 
         // Initialize the quiz
         function initQuiz() {
@@ -779,6 +251,8 @@
             if (urlParams.has('data')) {
                 try {
                     loadFromShareLink(urlParams.get('data'));
+                    document.querySelectorAll('.hide-in-link').forEach(el => el.style.display = 'none');
+                    document.querySelectorAll('.only-show-in-link').forEach(el => el.style.display = 'block')
                     return; // Skip normal initialization if loading from share link
                 } catch (e) {
                     console.error("Error loading shared data:", e);
@@ -854,6 +328,7 @@
             if (answeredQuestions === questionsData.length && currentQuestionIndex === questionsData.length - 1) {
                 // Calculate final scores
                 calculateScores();
+                catNameFormSection.style.display = 'block';
                 showResults();
             }
         }
@@ -971,7 +446,7 @@
             shareLink.textContent = shareUrl;
             
             const catName = catNameInput.value || "My Cat";
-            const shareText = `Check out ${catName}'s CAT-Tri+ results! Score: ${categoryScores.total.toFixed(0)}/5`;
+            const shareText = `I've tested if ${catName}'s a psychopath! Score: ${categoryScores.total.toFixed(0)}/5`;
             
             // Update social share links
             facebookShareBtn.href = `https://facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
@@ -1016,7 +491,7 @@
                 
                 // Set cat name
                 if (data.name) {
-                    catNameInput.value = data.name;
+                    catNameText.innerText = data.name;
                 }
                 
                 // Set scores
@@ -1033,8 +508,7 @@
                 showResults();
             } catch (e) {
                 console.error("Error loading shared data:", e);
-                alert("There was an error loading the shared results. Starting a new quiz...");
-                initQuiz();
+                location.href = '.'; // Redirect to home page if data is invalid
             }
         }
 
