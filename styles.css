@@ -332,7 +332,6 @@ h1 span.accent { color: var(--primary); }
     display: flex;
     flex-direction: column;
     gap: 6px;
-    margin-bottom: 24px;
 }
 
 .cat-name-input label {
@@ -383,6 +382,40 @@ h1 span.accent { color: var(--primary); }
     color: var(--text);
     font-family: 'Boogaloo', cursive;
     font-size: 1.2rem;
+}
+
+/* Step 2 (link + social) hidden until name is entered */
+.share-step2 {
+    display: none;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.3s ease;
+}
+.share-step2--visible { display: block; }
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* More prominent cat name input in share section */
+.share-container .cat-name-input label {
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+    text-transform: none;
+    font-weight: 600;
+}
+
+.share-container .cat-name-input input {
+    border-color: rgba(255,230,0,0.3);
+    font-size: 1.1rem;
+}
+
+.share-container .cat-name-input input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255,230,0,0.15);
 }
 
 .share-link-container {
