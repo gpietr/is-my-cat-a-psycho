@@ -16,16 +16,70 @@
 <body>
     <div class="container">
         <header>
-            <h1>The Cat Triarchic+ Questionnaire (CAT-Tri+)</h1>
+            <!-- Cat mascot SVG - expression changes via JS -->
+            <svg class="cat-mascot cat-face state-calm" id="cat-mascot" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <!-- Ears -->
+                <polygon points="18,38 8,10 34,28" fill="#ff2d78"/>
+                <polygon points="82,38 92,10 66,28" fill="#ff2d78"/>
+                <polygon class="ear-inner" points="20,36 12,16 32,30" fill="#ff9ec0"/>
+                <polygon class="ear-inner" points="80,36 88,16 68,30" fill="#ff9ec0"/>
+                <!-- Head -->
+                <circle cx="50" cy="54" r="36" fill="#1a1a2e" stroke="#ff2d78" stroke-width="2"/>
+                <!-- Left eye group -->
+                <g id="eye-left">
+                    <ellipse cx="35" cy="48" rx="8" ry="9" fill="#0a0a14"/>
+                    <ellipse class="eye-pupil" cx="36" cy="48" rx="4.5" ry="6" fill="#ffe600"/>
+                    <ellipse cx="37" cy="46" rx="1.5" ry="1.5" fill="white" opacity="0.9"/>
+                    <!-- lid -->
+                    <rect class="eye-lid" id="lid-left" x="27" y="39" width="16" height="9" rx="4" fill="#1a1a2e"/>
+                </g>
+                <!-- Right eye group -->
+                <g id="eye-right">
+                    <ellipse cx="65" cy="48" rx="8" ry="9" fill="#0a0a14"/>
+                    <ellipse class="eye-pupil" cx="66" cy="48" rx="4.5" ry="6" fill="#ffe600"/>
+                    <ellipse cx="67" cy="46" rx="1.5" ry="1.5" fill="white" opacity="0.9"/>
+                    <!-- lid -->
+                    <rect class="eye-lid" id="lid-right" x="57" y="39" width="16" height="9" rx="4" fill="#1a1a2e"/>
+                </g>
+                <!-- Nose -->
+                <polygon points="50,57 47,61 53,61" fill="#ff2d78"/>
+                <!-- Mouth -->
+                <path id="cat-mouth" d="M 44 63 Q 50 70 56 63" fill="none" stroke="#ff9ec0" stroke-width="1.8" stroke-linecap="round"/>
+                <!-- Whiskers left -->
+                <line x1="14" y1="56" x2="40" y2="59" stroke="#8888aa" stroke-width="1" opacity="0.7"/>
+                <line x1="14" y1="61" x2="40" y2="62" stroke="#8888aa" stroke-width="1" opacity="0.7"/>
+                <line x1="14" y1="66" x2="40" y2="65" stroke="#8888aa" stroke-width="1" opacity="0.5"/>
+                <!-- Whiskers right -->
+                <line x1="86" y1="56" x2="60" y2="59" stroke="#8888aa" stroke-width="1" opacity="0.7"/>
+                <line x1="86" y1="61" x2="60" y2="62" stroke="#8888aa" stroke-width="1" opacity="0.7"/>
+                <line x1="86" y1="66" x2="60" y2="65" stroke="#8888aa" stroke-width="1" opacity="0.5"/>
+            </svg>
+
+            <h1>Is My Cat a <span class="accent">Psycho?</span></h1>
         </header>
 
         <div class="instructions hide-in-link">
-            <p>Please consider each of the following statements and indicate which option best applies to your pet cat. We are interested in your opinions. There are no correct or incorrect responses.</p>
+            <p>The CAT-Tri+ Questionnaire. Consider each statement and pick how well it describes your cat. No right or wrong answers!</p>
         </div>
 
-        <div class="nav-container hide-in-link">
-            <div class="progress-text">Question <span id="current-question">1</span> of <span id="total-questions">46</span></div>
+        <div class="nav-container hide-in-link" style="display:none">
+            <div class="progress-text">Question <span>1</span> of <span>46</span></div>
         </div>
+
+
+        <!-- Quiz progress bar -->
+        <div class="quiz-progress-wrap hide-in-link">
+            <div class="quiz-progress-header">
+                <span class="quiz-progress-label">Progress</span>
+                <span class="quiz-progress-count">
+                    <span id="current-question">1</span> / <span id="total-questions">46</span>
+                </span>
+            </div>
+            <div class="quiz-progress-track">
+                <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+            </div>
+        </div>
+
 
         <div id="question-area" class="hide-in-link"></div>
 
@@ -249,6 +303,45 @@
 
         document.querySelectorAll('.only-show-in-link').forEach(el => el.style.display = 'none')
 
+        // Cat mascot states based on progress
+        const catMascot = document.getElementById('cat-mascot');
+        const catMouth = document.getElementById('cat-mouth');
+        const lidLeft = document.getElementById('lid-left');
+        const lidRight = document.getElementById('lid-right');
+
+        const catStates = {
+            calm:       { lidY: 39, lidH: 9, mouthD: 'M 44 63 Q 50 70 56 63', cls: 'state-calm' },
+            alert:      { lidY: 35, lidH: 4, mouthD: 'M 44 64 Q 50 67 56 64', cls: 'state-alert' },
+            suspicious: { lidY: 39, lidH: 11, mouthD: 'M 44 65 Q 50 62 56 65', cls: 'state-suspicious' },
+            chaos:      { lidY: 34, lidH: 3, mouthD: 'M 42 62 Q 50 73 58 62', cls: 'state-chaos' }
+        };
+
+        function updateCatState(pct) {
+            let state;
+            if (pct < 0.25)      state = catStates.calm;
+            else if (pct < 0.55) state = catStates.alert;
+            else if (pct < 0.80) state = catStates.suspicious;
+            else                 state = catStates.chaos;
+
+            catMascot.classList.remove('state-calm','state-alert','state-suspicious','state-chaos');
+            catMascot.classList.add(state.cls);
+            if (catMouth) catMouth.setAttribute('d', state.mouthD);
+            if (lidLeft)  { lidLeft.setAttribute('y', state.lidY); lidLeft.setAttribute('height', state.lidH); }
+            if (lidRight) { lidRight.setAttribute('y', state.lidY); lidRight.setAttribute('height', state.lidH); }
+        }
+
+        function updateQuizProgress() {
+            const total = questionsData.length;
+            const answered = Object.keys(answers).length;
+            const pct = answered / total;
+            const fill = document.getElementById('quiz-progress-fill');
+            if (fill) fill.style.width = (pct * 100) + '%';
+            updateCatState(pct);
+            // Update counter
+            const el = document.getElementById('current-question');
+            if (el) el.textContent = Math.min(currentQuestionIndex + 1, total);
+        }
+
         // Initialize the quiz
         function initQuiz() {
             // Check if URL has parameters
@@ -276,6 +369,7 @@
         function showQuestion(index) {
             const question = questionsData[index];
             currentQuestionSpan.textContent = index + 1;
+            updateQuizProgress();
             
             // Create question HTML
             questionArea.innerHTML = `
@@ -319,9 +413,10 @@
             
             // Update buttons
             updateNavButtons();
-            
+
             // Calculate scores in real-time
             calculateScores();
+            updateQuizProgress();
 
             showNextQuestion();
         }
@@ -419,10 +514,15 @@
             
             // Show results section
             resultsSection.style.display = 'block';
-            
+
             // Hide question area
             questionArea.style.display = 'none';
             document.querySelector('.nav-container').style.display = 'none';
+            document.querySelector('.quiz-progress-wrap') && (document.querySelector('.quiz-progress-wrap').style.display = 'none');
+            document.querySelector('.instructions') && (document.querySelector('.instructions').style.display = 'none');
+
+            // Cat goes full chaos on results
+            updateCatState(1.0);
         }
 
         // Generate share data
@@ -535,10 +635,14 @@
             
             // Show question area and navigation
             questionArea.style.display = 'block';
-            document.querySelector('.nav-container').style.display = 'flex';
-            
+            const pw = document.querySelector('.quiz-progress-wrap');
+            if (pw) pw.style.display = 'block';
+            const instr = document.querySelector('.instructions');
+            if (instr) instr.style.display = 'block';
+
             // Update buttons
             updateNavButtons();
+            updateQuizProgress();
         }
 
         // Initialize the quiz when the page loads
