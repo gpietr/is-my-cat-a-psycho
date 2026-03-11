@@ -86,6 +86,7 @@
         <div id="results" class="results">
             <h2 class="only-show-in-link">Is <span id="cat-name-text"></span> a psycho? I've tested!</h2>
             <h2 class="hide-in-link">Your Cat's Results</h2>
+            <div id="verdict-banner" class="verdict-banner"></div>
             <div class="results-grid">
                 <div class="result-card">
                     <h3>Boldness</h3>
@@ -187,7 +188,7 @@
                 <div id="share-step2" class="share-step2">
                 <div class="share-link-container">
                     <div id="share-link" class="share-link">Your unique URL will appear here</div>
-                    <button id="copy-link" class="copy-btn">Copy</button>
+                    <button id="copy-link" class="copy-btn">Copy link</button>
                 </div>
                 <div id="copy-success" class="share-success">Link copied to clipboard!</div>
                 <div class="social-buttons">
@@ -240,7 +241,7 @@
             </div>
 
             <button id="reset-quiz" class="reset-btn hide-in-link">Start Over</button>
-            <a href="." class="reset-btn only-show-in-link">Test my cat!</a>
+            <a href="." class="test-my-cat-btn only-show-in-link">🐱 Test my cat!</a>
         </div>
     </div>
 
@@ -565,11 +566,15 @@
 
             // Score-based verdict
             let verdict, emoji;
-            if (score < 2.0)      { verdict = "a surprisingly wholesome little angel";  emoji = "😇"; }
-            else if (score < 2.8) { verdict = "lowkey suspicious but we love them";      emoji = "🤨"; }
-            else if (score < 3.5) { verdict = "definitely plotting something";           emoji = "😏"; }
-            else if (score < 4.2) { verdict = "certified chaotic evil";                 emoji = "😈"; }
+            if (score < 2.0)      { verdict = "a surprisingly wholesome little angel (science confirms)";  emoji = "😇"; }
+            else if (score < 2.8) { verdict = "lowkey suspicious but we love them (science confirms)";      emoji = "🤨"; }
+            else if (score < 3.5) { verdict = "definitely plotting something (science confirms)";           emoji = "😏"; }
+            else if (score < 4.2) { verdict = "certified chaotic evil (science confirms)";                 emoji = "😈"; }
             else                  { verdict = "a full-on psychopath (science confirms)"; emoji = "🚨"; }
+
+            // Update verdict banner
+            const banner = document.getElementById('verdict-banner');
+            if (banner) banner.innerHTML = `<span class="verdict-emoji">${emoji}</span><span class="verdict-text"><strong>${catName}</strong> is <strong>${verdict}</strong></span><span class="verdict-score">${score.toFixed(1)}<small>/5</small></span>`;
 
             const shortText = `🐱 ${catName} scored ${score.toFixed(1)}/5 on the cat psychopathy scale — ${verdict} ${emoji} Is YOUR cat secretly evil too?`;
             const emailSubject = `${emoji} Is ${catName} a psycho? The results are in…`;
@@ -619,6 +624,7 @@
                 // Set cat name
                 if (data.name) {
                     catNameText.innerText = data.name;
+                    catNameInput.value = data.name;
                 }
                 
                 // Set scores
