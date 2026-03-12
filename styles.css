@@ -521,6 +521,14 @@ h1 span.accent { color: var(--primary); }
     display: inline-block;
 }
 
+button.resp-sharing-button__link {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+}
+
 .resp-sharing-button__link {
     text-decoration: none;
     color: #fff;
@@ -572,6 +580,8 @@ h1 span.accent { color: var(--primary); }
 .resp-sharing-button--whatsapp:hover { background-color: #1DA851; }
 .resp-sharing-button--telegram { background-color: #54A9EB; border: 1px solid #54A9EB; }
 .resp-sharing-button--telegram:hover { background-color: #4B97D1; }
+.resp-sharing-button--instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border: none; }
+.resp-sharing-button--instagram:hover { background: linear-gradient(45deg, #d4822b, #ca5a34, #c0213b, #b01e59, #a21376); }
 
 /* ── BUTTONS ── */
 button {
