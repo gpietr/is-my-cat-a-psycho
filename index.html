@@ -85,7 +85,6 @@
 
         <div id="results" class="results">
             <h2 class="only-show-in-link">Is <span id="cat-name-text"></span> a psycho? I've tested!</h2>
-            <h2 class="hide-in-link">Your Cat's Results</h2>
             <div id="verdict-banner" class="verdict-banner"></div>
             <div class="results-grid">
                 <div class="result-card">
@@ -97,9 +96,6 @@
                         <span>Low</span>
                         <span class="score-value" id="boldness-score">0.0</span>
                         <span>High</span>
-                    </div>
-                    <div class="category-description">
-                        Measures your cat's tendency to explore, take risks, and engage in adventurous behaviors.
                     </div>
                 </div>
 
@@ -113,9 +109,6 @@
                         <span class="score-value" id="disinhibition-score">0.0</span>
                         <span>High</span>
                     </div>
-                    <div class="category-description">
-                        Measures your cat's impulsivity, excitability, and need for stimulation.
-                    </div>
                 </div>
 
                 <div class="result-card">
@@ -127,9 +120,6 @@
                         <span>Low</span>
                         <span class="score-value" id="meanness-score">0.0</span>
                         <span>High</span>
-                    </div>
-                    <div class="category-description">
-                        Measures your cat's tendency to break rules, damage things, and lack remorse.
                     </div>
                 </div>
 
@@ -143,9 +133,6 @@
                         <span class="score-value" id="pet-unfriendliness-score">0.0</span>
                         <span>High</span>
                     </div>
-                    <div class="category-description">
-                        Measures your cat's dominance and aggression toward other pets.
-                    </div>
                 </div>
 
                 <div class="result-card">
@@ -157,24 +144,6 @@
                         <span>Low</span>
                         <span class="score-value" id="human-unfriendliness-score">0.0</span>
                         <span>High</span>
-                    </div>
-                    <div class="category-description">
-                        Measures your cat's aggression toward humans and resistance to being handled.
-                    </div>
-                </div>
-
-                <div class="result-card">
-                    <h3>Overall CAT-Tri+ Score</h3>
-                    <div class="progress-container">
-                        <div id="total-progress" class="progress-bar"></div>
-                    </div>
-                    <div class="progress-info">
-                        <span>Low</span>
-                        <span class="score-value" id="total-score">0.0</span>
-                        <span>High</span>
-                    </div>
-                    <div class="category-description">
-                        The overall score across all dimensions of the CAT-Tri+ measure.
                     </div>
                 </div>
             </div>
@@ -418,6 +387,10 @@
             const value = optionElement.getAttribute('data-value');
             answers[questionId] = value === 'null' ? null : parseInt(value);
             
+            // Hide instructions after first answer
+            const instr = document.querySelector('.instructions');
+            if (instr) instr.style.display = 'none';
+
             // Update buttons
             updateNavButtons();
 
@@ -498,23 +471,13 @@
             document.getElementById('meanness-score').textContent = categoryScores.meanness.toFixed(1);
             document.getElementById('pet-unfriendliness-score').textContent = categoryScores['pet-unfriendliness'].toFixed(1);
             document.getElementById('human-unfriendliness-score').textContent = categoryScores['human-unfriendliness'].toFixed(1);
-            document.getElementById('total-score').textContent = categoryScores.total.toFixed(1);
-            
+
             // Update progress bars (scale is 1-5)
             document.getElementById('boldness-progress').style.width = `${(categoryScores.boldness / 5) * 100}%`;
             document.getElementById('disinhibition-progress').style.width = `${(categoryScores.disinhibition / 5) * 100}%`;
             document.getElementById('meanness-progress').style.width = `${(categoryScores.meanness / 5) * 100}%`;
             document.getElementById('pet-unfriendliness-progress').style.width = `${(categoryScores['pet-unfriendliness'] / 5) * 100}%`;
             document.getElementById('human-unfriendliness-progress').style.width = `${(categoryScores['human-unfriendliness'] / 5) * 100}%`;
-            document.getElementById('total-progress').style.width = `${(categoryScores.total / 5) * 100}%`;
-            
-            // Color the progress bars based on score (blue gradient)
-            const progressBars = document.querySelectorAll('.progress-bar');
-            progressBars.forEach(bar => {
-                const score = parseFloat(bar.style.width) / 20; // Convert percentage to 0-5 scale
-                const blueIntensity = Math.floor((score / 5) * 255);
-                bar.style.backgroundColor = `rgb(0, ${100 + (155 * (1 - score/5))}, ${200 + (55 * (1 - score/5))})`;
-            });
             
             // Create share link and update buttons
             updateShareLinks();
@@ -566,17 +529,17 @@
 
             // Score-based verdict
             let verdict, emoji;
-            if (score < 2.0)      { verdict = "a surprisingly wholesome little angel (science confirms)";  emoji = "😇"; }
-            else if (score < 2.8) { verdict = "lowkey suspicious but we love them (science confirms)";      emoji = "🤨"; }
-            else if (score < 3.5) { verdict = "definitely plotting something (science confirms)";           emoji = "😏"; }
-            else if (score < 4.2) { verdict = "certified chaotic evil (science confirms)";                 emoji = "😈"; }
-            else                  { verdict = "a full-on psychopath (science confirms)"; emoji = "🚨"; }
+            if (score < 2.0)      { verdict = "a surprisingly wholesome little angel";  emoji = "😇"; }
+            else if (score < 2.8) { verdict = "lowkey suspicious but we love them";      emoji = "🤨"; }
+            else if (score < 3.5) { verdict = "definitely plotting something";           emoji = "😏"; }
+            else if (score < 4.2) { verdict = "certified chaotic evil";                 emoji = "😈"; }
+            else                  { verdict = "a full-on psychopath"; emoji = "🚨"; }
 
             // Update verdict banner
             const banner = document.getElementById('verdict-banner');
-            if (banner) banner.innerHTML = `<span class="verdict-emoji">${emoji}</span><span class="verdict-text"><strong>${catName}</strong> is <strong>${verdict}</strong></span><span class="verdict-score">${score.toFixed(1)}<small>/5</small></span>`;
+            if (banner) banner.innerHTML = `<span class="verdict-emoji">${emoji}</span><div class="verdict-body"><span class="verdict-text"><strong>${catName}</strong> is <strong>${verdict}</strong> (science confirms)</span><div class="verdict-bar-track"><div class="verdict-bar-fill" style="width:${(score/5)*100}%"></div></div></div><span class="verdict-score">${score.toFixed(1)}<small>/5</small></span>`;
 
-            const shortText = `🐱 ${catName} scored ${score.toFixed(1)}/5 on the cat psychopathy scale — ${verdict} ${emoji} Is YOUR cat secretly evil too?`;
+            const shortText = `🐱 ${catName} scored ${score.toFixed(1)}/5 on the cat psychopathy scale — ${verdict} (science confirms) ${emoji} Is YOUR cat secretly evil too?`;
             const emailSubject = `${emoji} Is ${catName} a psycho? The results are in…`;
             const emailBody = `I just put ${catName} through the CAT-Tri+ psychopathy questionnaire and the results are… interesting.\n\n${emoji} ${catName}'s verdict: ${verdict} (${score.toFixed(1)}/5)\n\nThink your cat is more (or less) unhinged? Find out:\n${shareUrl}`;
 
